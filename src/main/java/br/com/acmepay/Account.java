@@ -65,7 +65,7 @@ public class Account {
     public String extract(){
         String text = "Extract";
         for(String transaction : transactions){
-            text = text + "\ntransaction";
+            text = text + "\n" + transaction;
         }
         return text;
     }
