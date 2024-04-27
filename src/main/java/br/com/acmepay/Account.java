@@ -1,5 +1,6 @@
 package br.com.acmepay;
 
+import br.com.acmepay.exception.BalanceToWithdrawException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,10 +21,50 @@ public class Account {
     private LocalDate createdAt;
     private LocalDate updatedAt;
     private boolean closed;
-
-    public Account createAccount(){
-        return this;
+    public void createAccount(Account account){
+        this.id = account.id;
+        this.number = account.number;
+        this.agency = account.agency;
+        this.balance = account.balance;
+        this.customer = account.customer;
+        this.cards = account.cards;
+        this.createdAt = account.createdAt;
+        this.updatedAt = account.updatedAt;
+        this.closed = account.closed;
     }
+    public void deposit(BigDecimal amount){
+        this.balance.add(amount);
+    }
+    public void withdraw(BigDecimal amount) throws BalanceToWithdrawException {
+        if (this.balance.compareTo(amount) >= 0){
+            this.balance.subtract(amount);
+        }
+        else if (this.balance.subtract(amount).compareTo(BigDecimal.ZERO)<0){
+            throw new BalanceToWithdrawException("error: you have no balance");
+        }
+        else{
+            throw new BalanceToWithdrawException ("error: insufficient balance");
+        }
+
+    }
+    /*
+    * receber conta de destino
+    * receber valor a transferir
+    * depositar na conta de destino
+    * remover da conta de origem
+    * */
+    public String transfer(Account destinationAccount, BigDecimal amount) throws BalanceToWithdrawException{
+        try{
+            this.withdraw(amount);
+        }catch (BalanceToWithdrawException e){
+            System.out.println(e);
+        }
+        destinationAccount.deposit(amount);
+        return "transaction sucessful!";
+
+    }
+
+
 
 
 }
