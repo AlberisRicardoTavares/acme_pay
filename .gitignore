@@ -15,3 +15,16 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+
+# Arquivos temporários da IDE IntelliJ IDEA
+.idea/
+
+# Arquivos de compilação e saída
+out/
+target/
+
+# Arquivos de configuração específicos do IntelliJ IDEA
+*.iml
+*.ipr
+*.iws
+.idea_modules/
