@@ -1,4 +1,4 @@
-package br.com.acmepay;
+package br.com.acmepay.domain.models;
 
 /**
  * Hello world!
@@ -8,6 +8,10 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+
+        Account account = new Account();
+
+
+
     }
 }

@@ -1,4 +1,4 @@
-package br.com.acmepay.exception;
+package br.com.acmepay.domain.exception;
 
 public class DocumentValidationException extends Exception {
     public DocumentValidationException (String message){

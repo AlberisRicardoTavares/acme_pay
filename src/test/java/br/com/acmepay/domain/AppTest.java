@@ -1,4 +1,4 @@
-package br.com.acmepay;
+package br.com.acmepay.domain;
 
 import static org.junit.Assert.assertTrue;
 

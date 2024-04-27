@@ -1,6 +1,6 @@
-package br.com.acmepay;
+package br.com.acmepay.domain.models;
 
-import br.com.acmepay.exception.BalanceToWithdrawException;
+import br.com.acmepay.domain.exception.BalanceToWithdrawException;
 import lombok.Getter;
 import lombok.Setter;
 

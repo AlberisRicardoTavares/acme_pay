@@ -1,4 +1,4 @@
-package br.com.acmepay.exception;
+package br.com.acmepay.domain.exception;
 
 public class BalanceToWithdrawException extends Exception {
 

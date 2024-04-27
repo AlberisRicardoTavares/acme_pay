@@ -1,7 +1,7 @@
-package br.com.acmepay;
+package br.com.acmepay.domain.models;
 
-import br.com.acmepay.exception.DocumentValidationException;
-import br.com.acmepay.exception.EmailValidationException;
+import br.com.acmepay.domain.exception.DocumentValidationException;
+import br.com.acmepay.domain.exception.EmailValidationException;
 import lombok.Getter;
 import lombok.Setter;
 
