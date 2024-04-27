@@ -33,18 +33,16 @@ public class Account {
         this.closed = account.closed;
     }
     public void deposit(BigDecimal amount){
-        this.balance.add(amount);
+        this.balance = this.balance.add(amount);
     }
     public void withdraw(BigDecimal amount) throws BalanceToWithdrawException {
-        if (this.balance.compareTo(amount) >= 0){
-            this.balance.subtract(amount);
-        }
-        else if (this.balance.subtract(amount).compareTo(BigDecimal.ZERO)<0){
+        if (this.balance.compareTo(BigDecimal.ZERO) <= 0){
             throw new BalanceToWithdrawException("error: you have no balance");
         }
-        else{
+        else if (this.balance.subtract(amount).compareTo(BigDecimal.ZERO) < 0){
             throw new BalanceToWithdrawException ("error: insufficient balance");
         }
+        this.balance = this.balance.subtract(amount);
 
     }
     /*
