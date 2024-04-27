@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
@@ -21,6 +22,8 @@ public class Account {
     private LocalDate createdAt;
     private LocalDate updatedAt;
     private boolean closed;
+
+    private List<String> transactions = new ArrayList<>();
     public void createAccount(Account account){
         this.id = account.id;
         this.number = account.number;
@@ -31,9 +34,11 @@ public class Account {
         this.createdAt = account.createdAt;
         this.updatedAt = account.updatedAt;
         this.closed = account.closed;
+        transactions.add("account created sucessfully" + createdAt);
     }
     public void deposit(BigDecimal amount){
         this.balance = this.balance.add(amount);
+        transactions.add("transaction received iin the amount of:" + amount);
     }
     public void withdraw(BigDecimal amount) throws BalanceToWithdrawException {
         if (this.balance.compareTo(BigDecimal.ZERO) <= 0){
@@ -43,14 +48,9 @@ public class Account {
             throw new BalanceToWithdrawException ("error: insufficient balance");
         }
         this.balance = this.balance.subtract(amount);
-
+        transactions.add("transaction made in the amount of:" + amount);
     }
-    /*
-    * receber conta de destino
-    * receber valor a transferir
-    * depositar na conta de destino
-    * remover da conta de origem
-    * */
+
     public String transfer(Account destinationAccount, BigDecimal amount) throws BalanceToWithdrawException{
         try{
             this.withdraw(amount);
@@ -60,6 +60,14 @@ public class Account {
         destinationAccount.deposit(amount);
         return "transaction sucessful!";
 
+    }
+
+    public String extract(){
+        String text = "Extract";
+        for(String transaction : transactions){
+            text = text + "\ntransaction";
+        }
+        return text;
     }
 
 
