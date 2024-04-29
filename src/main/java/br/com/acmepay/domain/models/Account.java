@@ -10,12 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
-    @Getter
     private Bank bank;
     private Long id;
     private int number;
     private int agency;
-    @Getter @Setter
     private BigDecimal balance;
     private Customer customer;
     private List<Card> cards;
@@ -24,7 +22,8 @@ public class Account {
     private boolean closed;
 
     private List<String> transactions = new ArrayList<>();
-    public void createAccount(Account account){
+
+    public void createAccount(Account account) {
         this.id = account.id;
         this.number = account.number;
         this.agency = account.agency;
@@ -36,25 +35,26 @@ public class Account {
         this.closed = account.closed;
         transactions.add("account created sucessfully" + createdAt);
     }
-    public void deposit(BigDecimal amount){
+
+    public void deposit(BigDecimal amount) {
         this.balance = this.balance.add(amount);
         transactions.add("transaction received iin the amount of:" + amount);
     }
+
     public void withdraw(BigDecimal amount) throws BalanceToWithdrawException {
-        if (this.balance.compareTo(BigDecimal.ZERO) <= 0){
+        if (this.balance.compareTo(BigDecimal.ZERO) <= 0) {
             throw new BalanceToWithdrawException("error: you have no balance");
-        }
-        else if (this.balance.subtract(amount).compareTo(BigDecimal.ZERO) < 0){
-            throw new BalanceToWithdrawException ("error: insufficient balance");
+        } else if (this.balance.subtract(amount).compareTo(BigDecimal.ZERO) < 0) {
+            throw new BalanceToWithdrawException("error: insufficient balance");
         }
         this.balance = this.balance.subtract(amount);
         transactions.add("transaction made in the amount of:" + amount);
     }
 
-    public String transfer(Account destinationAccount, BigDecimal amount) throws BalanceToWithdrawException{
-        try{
+    public String transfer(Account destinationAccount, BigDecimal amount) throws BalanceToWithdrawException {
+        try {
             this.withdraw(amount);
-        }catch (BalanceToWithdrawException e){
+        } catch (BalanceToWithdrawException e) {
             System.out.println(e);
         }
         destinationAccount.deposit(amount);
@@ -62,15 +62,13 @@ public class Account {
 
     }
 
-    public String extract(){
+    public String extract() {
         String text = "Extract";
-        for(String transaction : transactions){
+        for (String transaction : transactions) {
             text = text + "\n" + transaction;
         }
         return text;
     }
-
-
 
 
 }
